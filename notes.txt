@@ -1,0 +1,7 @@
+- Current models:
+	ViltforVQA:
+		pros: very quick inference
+		cons: one word answers
+	Visual Chat GPT:
+		pros: umm, chatgpt on images???
+		cons: a pain to use the api
