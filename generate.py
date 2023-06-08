@@ -3,7 +3,6 @@ import os
 from csv import writer
 
 class Generator:
-
     def __init__(self, model_name) -> None:
         self.vqa_object = VQA(model_name)
         self.vqa_object.setup()
@@ -13,7 +12,7 @@ class Generator:
         for image_path in image_paths:
             self.generate(image_path=image_path, questions=questions, output_file=output_file)
             
-    def generate(self, image_path, questions, output_file):
+    def generate(self, image_path, questions, output_file) -> None:
         answers = []
         for question in questions:
             answer = self.vqa_object.answer(image_path, question)
