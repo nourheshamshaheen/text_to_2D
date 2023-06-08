@@ -4,11 +4,14 @@ from generate import Generator
 def main(args):
     model_name = args.model_name
     gen = Generator(model_name=model_name)
+    filename = args.question_list
+    with open(filename) as file:
+        questions = [line.rstrip() for line in file]
     all = args.all
     if all:
-        gen.generate_all(image_folder=args.images, questions=args.question_list, output_file=args.output_file)
+        gen.generate_all(image_folder=args.images, questions=questions, output_file=args.output_file)
     else:
-        gen.generate(image_path=args.images, questions=args.question_list, output_file=args.output_file)
+        gen.generate(image_path=args.images, questions=questions, output_file=args.output_file)
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--model_name", help="Model name you want to use", type=str, choices=["vilt", "v_chatgpt"])
