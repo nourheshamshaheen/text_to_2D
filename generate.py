@@ -3,8 +3,8 @@ import os
 from csv import writer
 
 class Generator:
-    def __init__(self, model_name, path_to_dataset=None) -> None:
-        self.vqa_object = VQA(model_name, path_to_dataset=path_to_dataset)
+    def __init__(self, args) -> None:
+        self.vqa_object = VQA(args)
         self.vqa_object.setup()
 
     def generate_all(self, image_folder, questions, output_file) -> None:

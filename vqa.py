@@ -3,14 +3,17 @@ from transformers import ViltProcessor, ViltForQuestionAnswering
 from flamingo import flamingo_setup, flamingo_predict
 from PIL import Image
 import requests
-from transformers import LlamaForCausalLM, LlamaTokenizer
-
-
+import subprocess
+import torch
+import os
+from LLaVA.llava.eval.run_llava import eval_model
+from argparse import Namespace
 
 class VQA:
-    def __init__(self, model_name, path_to_celeba=None) -> None:
-        self.model_name = model_name
-        self.path = path_to_celeba
+    def __init__(self, args) -> None:
+        self.model_name = args.model_name
+        self.path = args.path_to_celeba
+        self.llava_weights = args.llava_weights
 
     def setup(self) -> None:
         if self.model_name == "vilt":
@@ -18,15 +21,6 @@ class VQA:
             self.model = ViltForQuestionAnswering.from_pretrained("dandelin/vilt-b32-finetuned-vqa")
         elif self.model_name == "flamingo":
             self.model, self.processor, self.tokenizer = flamingo_setup()
-        elif self.model_name == "llava":
-            self.tokenizer = LlamaTokenizer.from_pretrained("huggyllama/llama-13b")
-            self.model = LlamaForCausalLM.from_pretrained("huggyllama/llama-13b")
-        else:
-            self.processor = None
-            self.model = None
-        assert self.processor is not None
-        assert self.model is not None
-
     
     def answer(self, image_path, text) -> str:
         image = Image.open(image_path)
@@ -41,4 +35,16 @@ class VQA:
     
         elif self.model_name == "flamingo":
             return flamingo_predict(image, self.path, self.model, self.processor, self.tokenizer)
+        
+        elif self.model_name == "llava":
+            args = Namespace(model_name=self.llava_weights, image_file=image_path, query=text, conv_mode=None)
+            answer = eval_model(args)
+            return answer
+            # command = f"python -m llava.eval.run_llava --model-name {self.llava_weights} --image-file {image_path} --query {text}"
+            # with os.popen(command) as f:
+            #     answer = f.readlines()
+            #     print("Answer is:", answer)
+            #     return answer
         return None
+
+
