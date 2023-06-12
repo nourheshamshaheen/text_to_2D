@@ -3,6 +3,7 @@ from transformers import ViltProcessor, ViltForQuestionAnswering
 from flamingo import flamingo_setup, flamingo_predict
 from PIL import Image
 import requests
+from transformers import LlamaForCausalLM, LlamaTokenizer
 
 
 
@@ -17,6 +18,9 @@ class VQA:
             self.model = ViltForQuestionAnswering.from_pretrained("dandelin/vilt-b32-finetuned-vqa")
         elif self.model_name == "flamingo":
             self.model, self.processor, self.tokenizer = flamingo_setup()
+        elif self.model_name == "llava":
+            self.tokenizer = LlamaTokenizer.from_pretrained("huggyllama/llama-13b")
+            self.model = LlamaForCausalLM.from_pretrained("huggyllama/llama-13b")
         else:
             self.processor = None
             self.model = None
