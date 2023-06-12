@@ -8,9 +8,11 @@ class Generator:
         self.vqa_object.setup()
 
     def generate_all(self, image_folder, questions, output_file) -> None:
+        print("Generating all ...")
         image_paths = os.listdir(image_folder)
         for image_path in image_paths:
-            self.generate(image_path=image_path, questions=questions, output_file=output_file)
+            full_path = os.path.join(image_folder, image_path)
+            self.generate(image_path=full_path, questions=questions, output_file=output_file)
             
     def generate(self, image_path, questions, output_file) -> None:
         answers = []

@@ -23,8 +23,10 @@ class VQA:
         elif self.model_name == "flamingo":
             self.model, self.processor, self.tokenizer = flamingo_setup()
         elif self.model_name == "llava":
+            print("Setting up LLAVA...")
             args = Namespace(model_name=self.llava_weights, query=self.query, conv_mode=None)
             self.tokenizer, self.image_processor, self.model, self.qs, self.conv_mode = eval_setup(args)
+            print("LLAVA SETUP DONE!")
     
     def answer(self, image_path, text) -> str:
         image = Image.open(image_path)
