@@ -7,10 +7,8 @@ def main(args):
         filename = args.question_list
         with open(filename) as file:
             questions = [line.rstrip() for line in file]
-    elif args.model_name == "flamingo": 
+    elif args.model_name == "flamingo" or args.model_name == "llava": 
         questions = [0] # here, question is a list because generator deals with questions as multiple ones
-    elif args.model_name == "llava":
-        questions = [args.llava_prompt] # here, question is a list because generator deals with questions as multiple ones   
     all = args.all
     if all:
         gen.generate_all(image_folder=args.images, questions=questions, output_file=args.output_file)

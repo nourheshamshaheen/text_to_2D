@@ -96,8 +96,8 @@ def flamingo_predict(query_image, path, model, image_processor, tokenizer):
 
 
 
-m, p, t = flamingo_setup()
-path = "/home/nour.shaheen/Downloads/img_align_celeba/img_align_celeba/"
-image_path = "/home/nour.shaheen/Documents/imgs/000001.jpg"
-query_image = Image.open(image_path)
-flamingo_predict(query_image, path, m, p, t)
+# m, p, t = flamingo_setup()
+# path = "/home/nour.shaheen/Downloads/img_align_celeba/img_align_celeba/"
+# image_path = "/home/nour.shaheen/Documents/imgs/000001.jpg"
+# query_image = Image.open(image_path)
+# flamingo_predict(query_image, path, m, p, t)

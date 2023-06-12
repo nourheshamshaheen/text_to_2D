@@ -7,4 +7,4 @@ scikit-learn==0.23.2
 torch==1.10.0+cu111
 torchvision==0.11.0+cu111
 transformers==4.14.0
-
+accelerate
