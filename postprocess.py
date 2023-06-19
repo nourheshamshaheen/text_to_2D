@@ -53,7 +53,7 @@ parser.add_argument("--api_key", help="(Optional) API key if model is GPT", defa
 parser.add_argument("--temp_img", help="black image to input to llava", default="/home/nour.shaheen/Documents/vqa/text_to_2D/black.png", type=str)
 parser.add_argument("--input_file", help="Input CSV file that has your unprocessed dataset", type=str)
 parser.add_argument("--output_file", help="Output CSV file to add your dataset to", default="", type=str)
-parser.add_argument("--query", help="Query to input to the summarizer/text generation model", default="Summarize without losing any important information, in 50 words or less: ", type=str)
+parser.add_argument("--query", help="Query to input to the summarizer/text generation model", default="Summarize while keeping all important information, in 50 words or less: ", type=str)
 parser.add_argument("--all", help="If you want to summarize one line or the entire csv", action='store_true')
 parser.add_argument("--fix_path", help="If you want to cut the path of the image to be only the image ID", action='store_true')
 args = parser.parse_args()
